@@ -844,6 +844,7 @@ cc_library_static {
         "bionic/sysconf.cpp",
         "bionic/vdso.cpp",
         "bionic/setjmp_cookie.cpp",
+        "bionic/explicit_bzero.cpp",
 
         // The following must not be statically linked into libc_ndk.a, because
         // debuggerd will look for the abort message in libc.so's copy.
