@@ -55,6 +55,7 @@ void* _Nonnull memcpy(void* _Nonnull, const void* _Nonnull, size_t);
 void* _Nonnull mempcpy(void* _Nonnull __dst, const void* _Nonnull __src, size_t __n) __INTRODUCED_IN(23);
 #endif
 void* _Nonnull memmove(void* _Nonnull __dst, const void* _Nonnull __src, size_t __n);
+void* explicit_bzero(void *s, size_t n);
 
 /**
  * [memset(3)](http://man7.org/linux/man-pages/man3/memset.3.html) writes the
