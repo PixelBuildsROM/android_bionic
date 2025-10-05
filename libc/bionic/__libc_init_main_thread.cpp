@@ -123,13 +123,13 @@ extern "C" void android_reset_stack_guards() {
   // before we initialize the TLS. Dynamic executables will initialize their copy of the global
   // stack protector from the one in the main thread's TLS.
   __libc_safe_arc4random_buf(&__stack_chk_guard[0], sizeof(__stack_chk_guard[0]));
+#if __LP64__
+  // Sacrifice 8 bits of entropy on 64-bit to mitigate non-terminated C string overflows
+  __stack_chk_guard[0] &= canary_mask;
+#endif
   if (mprotect(__stack_chk_guard, sizeof(__stack_chk_guard), PROT_READ) == -1) {
     async_safe_fatal("mprotect __stack_chk_guard: %s", strerror(errno));
   }
-#if __LP64__
-  // Sacrifice 8 bits of entropy on 64-bit to mitigate non-terminated C string overflows
-  __stack_chk_guard &= canary_mask;
-#endif
   __init_tcb_stack_guard(__get_bionic_tcb());
 }
 
